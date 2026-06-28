@@ -84,3 +84,4 @@ Frontend chạy tại:
 ```text
 http://localhost:3000
 ```
+# fruit_detection
