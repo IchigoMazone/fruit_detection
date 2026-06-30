@@ -8,7 +8,6 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 type Mode = "image" | "video" | "camera";
-type ModelOption = "best2" | "resnet";
 
 type Detection = {
   class_id: number;
@@ -50,7 +49,6 @@ const modes: Array<{ value: Mode; label: string; icon: typeof ImageIcon }> = [
 
 export default function Home() {
   const [mode, setMode] = useState<Mode>("image");
-  const [modelOption, setModelOption] = useState<ModelOption>("best2");
   const [confidence, setConfidence] = useState(0.25);
   const [iou, setIou] = useState(DEFAULT_IOU);
   const [loading, setLoading] = useState(false);
@@ -103,12 +101,10 @@ export default function Home() {
       formData.append("file", file);
       const params = new URLSearchParams({
         confidence: String(confidence),
-        classifier_conf: String(confidence),
         imgsz: String(DEFAULT_IMAGE_SIZE),
         max_det: String(DEFAULT_MAX_DET),
         iou: String(iou),
-        quality: String(DEFAULT_RESULT_QUALITY),
-        model: modelOption
+        quality: String(DEFAULT_RESULT_QUALITY)
       });
       const response = await fetch(`${API_URL}/detect/image?${params.toString()}`, {
         method: "POST",
@@ -253,12 +249,10 @@ export default function Home() {
         formData.append("file", new File([blob], "frame.jpg", { type: "image/jpeg" }));
         const params = new URLSearchParams({
           confidence: String(confidence),
-          classifier_conf: String(confidence),
           imgsz: String(imageSize),
           max_det: String(maxDet),
           iou: String(iou),
-          quality: String(resultQuality),
-          model: modelOption
+          quality: String(resultQuality)
         });
         const response = await fetch(`${API_URL}/detect/image?${params.toString()}`, {
           method: "POST",
@@ -290,7 +284,7 @@ export default function Home() {
           <div className="flex min-w-0 items-baseline gap-3">
             <span className="text-base font-semibold">Fruit Detection</span>
             <span className="truncate text-sm text-muted-foreground">
-              {modelOption === "best2" ? "YOLO" : "YOLO + ResNet"}
+              YOLO
             </span>
           </div>
         </header>
@@ -345,30 +339,7 @@ export default function Home() {
               </label>
             </Card>
 
-            <div className="mt-4 grid gap-1 rounded-lg border border-border bg-muted p-1">
-              <Button
-                type="button"
-                variant={modelOption === "best2" ? "outline" : "ghost"}
-                className={cn(modelOption === "best2" && "bg-white shadow-sm")}
-                onClick={() => {
-                  setModelOption("best2");
-                  resetResult();
-                }}
-              >
-                YOLO
-              </Button>
-              <Button
-                type="button"
-                variant={modelOption === "resnet" ? "outline" : "ghost"}
-                className={cn(modelOption === "resnet" && "bg-white shadow-sm")}
-                onClick={() => {
-                  setModelOption("resnet");
-                  resetResult();
-                }}
-              >
-                YOLO + ResNet
-              </Button>
-            </div>
+
 
             {mode !== "camera" ? (
               <label className="mt-4 grid min-h-36 cursor-pointer place-items-center gap-3 rounded-lg border border-dashed border-slate-300 bg-white p-5 text-center text-sm text-muted-foreground transition-colors hover:border-primary hover:bg-green-50 hover:text-green-800">
