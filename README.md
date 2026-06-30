@@ -1,6 +1,6 @@
 # Fruit Detection App
 
-Ứng dụng phát hiện trái cây bằng YOLO và chế độ YOLO + ResNet.
+Ứng dụng phát hiện trái cây bằng YOLO.
 
 ## Yêu cầu
 
@@ -39,11 +39,7 @@ uv --version
 
 ## Cài model về máy
 
-Mở file `data/link_model.txt`, tải đủ 3 model, sau đó đặt cả 3 file về cùng cấp với `README.md`:
-
-- `best.pt`
-- `best (2).pt`
-- `fruit_classifier.pth`
+Mở file `data/link_model.txt`, tải model `best (2).pt` về và đặt cùng cấp với `README.md`.
 
 ## Cài thư viện backend
 

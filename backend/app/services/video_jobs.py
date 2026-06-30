@@ -44,7 +44,6 @@ def public_video_job(job_id: str) -> dict[str, Any]:
             "progress": job["progress"],
             "processed_frames": job["processed_frames"],
             "total_frames": job["total_frames"],
-            "model": job.get("model"),
             "error": job.get("error"),
             "result_url": f"/detect/video/jobs/{job_id}/result" if job["status"] == "done" else None,
         }
@@ -152,8 +151,6 @@ def process_video_job(
     confidence: float,
     image_size: int,
     max_det: int,
-    model_option: str,
-    classifier_confidence: float,
     iou: float,
 ) -> None:
     capture = cv2.VideoCapture(str(input_path))
@@ -185,8 +182,6 @@ def process_video_job(
                 confidence,
                 image_size,
                 max_det,
-                model_option,
-                classifier_confidence,
                 iou,
                 draw=False,
             )
@@ -222,8 +217,6 @@ def create_video_job(
     confidence: float,
     image_size: int,
     max_det: int,
-    model_option: str,
-    classifier_confidence: float,
     iou: float,
 ) -> dict[str, Any]:
     suffix = Path(file_name or "video.mp4").suffix or ".mp4"
@@ -240,13 +233,12 @@ def create_video_job(
             "total_frames": 0,
             "input_path": str(input_path),
             "output_path": str(output_path),
-            "model": model_option,
             "error": None,
         }
 
     Thread(
         target=process_video_job,
-        args=(job_id, input_path, output_path, confidence, image_size, max_det, model_option, classifier_confidence, iou),
+        args=(job_id, input_path, output_path, confidence, image_size, max_det, iou),
         daemon=True,
     ).start()
     return public_video_job(job_id)
