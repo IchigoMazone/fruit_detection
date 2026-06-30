@@ -1,5 +1,9 @@
+link dataset ban đầu
 https://universe.roboflow.com/itrash/apple-khthj/browse
 
-https://universe.roboflow.com/dragon-fruit-un3xe/banana-gh2yn/browse?queryText=&pageSize=50&startingIndex=50&browseQuery=true
+https://universe.roboflow.com/dragon-fruit-un3xe/banana-gh2…wse?queryText=&pageSize=50&startingIndex=50&browseQuery=true
 
-https://universe.roboflow.com/new-tomato-detection/tomato-detection-wb9kx/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true
+https://universe.roboflow.com/new-tomato-detection/tomato-d…owse?queryText=&pageSize=50&startingIndex=0&browseQuery=true
+
+link dataset sau khi tiền xử lý
+https://drive.google.com/file/d/1rxzZhm-bQWGufd4igwTSZQGy-P_A7t4a/view
